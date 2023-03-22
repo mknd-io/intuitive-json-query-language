@@ -1,3 +1,5 @@
+const {JSONPath} = require('jsonpath-plus');
+
 function isObject (value) {
     return value && typeof value === 'object' && value.constructor === Object;
 }
@@ -11,7 +13,8 @@ function getValueOnPropertyPath(object, propertyPath) {
         return null;
     }
 
-    if (propertyPath.includes('.')) {
+    const result = JSONPath({wrap: false, path: propertyPath, json: object});
+   /* if (propertyPath.includes('.')) {
         const firstDotIndex = propertyPath.indexOf('.');
         const firstChunk    = propertyPath.substr(0, firstDotIndex);
         const remainderPath = propertyPath.substr(firstDotIndex + 1);
@@ -24,7 +27,8 @@ function getValueOnPropertyPath(object, propertyPath) {
         }
     } else {
         return object[propertyPath] || null;
-    }
+    }*/
+    return result || null;
 }
 
 module.exports = getValueOnPropertyPath;

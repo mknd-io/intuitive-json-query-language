@@ -1,5 +1,3 @@
-const getValueOnPropertyPath = require('./get-value-on-property-path');
-
 function checkInclusion(valueOnProperty, lookupValue, isNegated) {
     if (valueOnProperty) {
         if (Array.isArray(valueOnProperty) || typeof valueOnProperty === 'string') {

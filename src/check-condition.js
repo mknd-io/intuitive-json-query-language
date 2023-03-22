@@ -31,8 +31,15 @@ function evaluateCondition(objectToCheck, condition) {
     if (!lookupValue) {
         throw new Error(`You haven't specified what to look for in condition: "${condition}"`);
     }
-
-    return !!operator && !!valueOfProperty && !!lookupValue && checkerMap[operator](valueOfProperty, lookupValue);
+    if (Array.isArray(valueOfProperty)) {
+      if ([ NOT_INCLUDES, IS_NOT ].includes(operator)) {
+      	return !!operator && !!valueOfProperty && !!lookupValue && valueOfProperty.every(e => checkerMap[operator](e, lookupValue));
+      } else {
+	return !!operator && !!valueOfProperty && !!lookupValue && valueOfProperty.some(e => checkerMap[operator](e, lookupValue));
+      }
+    } else {
+      return !!operator && !!valueOfProperty && !!lookupValue && checkerMap[operator](valueOfProperty, lookupValue);
+    }
 }
 
 module.exports = function (objectToCheck, condition) {

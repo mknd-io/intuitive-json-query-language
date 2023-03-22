@@ -62,7 +62,6 @@ describe('Test one element agaisnt queries', () => {
             testElementAgainstQuery(heroes[0], 'firstRelease < 1943'),
             testElementAgainstQuery(heroes[0], 'knownAs IS Superman OR (name.firstName INCLUDES Clark AND name.lastName IS Parker)'),
         ]
-
         results.forEach(res => {
             expect(res).to.be.false;
         })

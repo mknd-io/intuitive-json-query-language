@@ -99,7 +99,7 @@ describe('getValueOnPropertyPath function', () => {
 
                 const result = getValueOnPropertyPath(input, 'hero.enemies.1');
 
-                expect(result).to.be.null;
+                expect(result).to.equal(input.hero.enemies[1]);
             });
         });
 
@@ -118,5 +118,19 @@ describe('getValueOnPropertyPath function', () => {
                 expect(result).to.equal(input.hero.name.lastName);
             });
         });
+        describe('AND WHEN one of the level is an array and we want to match a subproperty', () => {
+            it('should return the values', () => {
+                const input = {
+                    hero: {
+			    enemies: [ { name: 'Dr. Octopus' }, { name: 'Venom' } ]
+                    }
+                }
+
+                const result = getValueOnPropertyPath(input, 'hero.enemies[*].name');
+                expect(result[0]).to.equal(input.hero.enemies[0].name);
+		expect(result[1]).to.equal(input.hero.enemies[1].name);
+            });
+        });
+
     });
 });
