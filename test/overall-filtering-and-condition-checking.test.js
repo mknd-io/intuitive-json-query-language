@@ -26,6 +26,14 @@ const heroes = [
             'Owl',
             'Bullseye'
         ]
+    },
+    {
+	knownAs: 'Batman',
+	enemies: [
+		{ name: 'Kingpin' },
+		{ name: 'Owl' },
+		{ name: 'Bullseye' }
+	] 
     }
 ];
 
@@ -66,4 +74,9 @@ describe('Test one element agaisnt queries', () => {
             expect(res).to.be.false;
         })
     })
+   
+    it('should return the elements', () => {
+	const result = filter(heroes, 'enemies[*].name INCLUDES Owl');
+	expect(result[0]).to.equal(heroes[2])
+    })	
 });
