@@ -1,6 +1,8 @@
 # intuitive-json-query-language
 A simple, human-readable query language implementation for being able to filter for specific JavaScript/JSON objects in an array.
 
+Notes: jsonpathplus supports the original syntax of it but extend it to support nested objects into array using jsonpath which was a lack
+
 ## Motivation
 
 My main motivation was to create a JQL-like query language for JSON objects which I can use to define complex criterias for generating smart music playlist from my music library.
